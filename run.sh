@@ -1,2 +1,2 @@
-dos2unix iptables.sh
+sed -i -e 's/\r$//' iptables.sh
 ./iptables.sh
