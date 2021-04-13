@@ -32,6 +32,10 @@ iptables -P FORWARD DROP
 iptables -A OUTPUT -p tcp --sport 22 -j ACCEPT
 iptables -A INPUT -p tcp --sport 22 -j ACCEPT
 
+#SSH
+sudo iptables -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A OUTPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+
 #Prichozi NAT
 iptables -A PREROUTING -t nat -p tcp -i eth0 --dport 22 -j DNAT --to-destination 192.168.11.13:22
 
